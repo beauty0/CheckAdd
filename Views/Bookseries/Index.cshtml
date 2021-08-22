@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CheckAdd.Models.Bookserie>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link href="~/css/StyleSheet.css" rel="stylesheet" />
+<h1>Index</h1>
+<div class="jumbotron">
+    <p><button type="button" class="btn btn-primary btn-large" onclick="location.href='@Url.Action("Create", "Bookseries")'">Order Some Books &raquo;</button></p>
+</div>
+<p>
+</p>
+<div class="container">
+    <form asp-controller="Bookseries" asp-action="Index" method="get">
+        <p>
+            <input type="search" name="SearchString"  placeholder="Search" class="search-field" />
+            <button type="submit" class="search-button">
+            </button>
+        </p>
+    </form>
+</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AuthorId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genre)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AuthorId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genre.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.BookserieId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.BookserieId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.BookserieId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
